@@ -1,3 +1,5 @@
+Developed a serverless AI agent on AWS using FastAPI and LangGraph to handle natural language queries for real-time and historical stock prices. The backend integrates AWS Lambda and Bedrock, with infrastructure defined in Terraform.
+
 ## How to Deploy:
 
 ### 1. Navigate to serve directory and create a clean package folder
@@ -44,6 +46,7 @@ Grant "public access" permission to s3 file or set up aws cloudfront pointing to
 
 ### 8. Test web application
 Open the public URL in your browser—you’ll see an input box. Enter your stock-related questions there. Currently, the tool supports two types of queries: the current price and historical prices for a single stock.  
+  
 Sample questions:  
 1) What is the stock price for Amazon right now?  
 2) What were the stock prices for Amazon in Q4 last year?  
