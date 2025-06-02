@@ -24,7 +24,7 @@
       const responseBox = document.getElementById('response');
       responseBox.textContent = 'Loading...';
       try {
-        const response = await fetch(`http://localhost:8000/query?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`{api_url}/query?q=${encodeURIComponent(query)}`);
         if (!response.body) {
           responseBox.textContent = 'No response body';
           return;
