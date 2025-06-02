@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock AI Agent</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f4; }
+    h1 { color: #333; }
+    input, button { padding: 0.5rem; font-size: 1rem; margin-top: 0.5rem; }
+    #response { white-space: pre-wrap; margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #ccc; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Ask about Stocks</h1>
+  <input type="text" id="query" placeholder="e.g. What is the stock price for Amazon right now?">
+  <br>
+  <button onclick="askQuestion()">Ask</button>
+  <div id="response"></div>
+
+  <script>
+    async function askQuestion() {
+      const query = document.getElementById('query').value;
+      const responseBox = document.getElementById('response');
+      responseBox.textContent = 'Loading...';
+      try {
+        const response = await fetch(`http://localhost:8000/query?q=${encodeURIComponent(query)}`);
+        if (!response.body) {
+          responseBox.textContent = 'No response body';
+          return;
+        }
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let result = '';
+
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          result += decoder.decode(value);
+          responseBox.textContent = result;
+        }
+      } catch (err) {
+        responseBox.textContent = 'Error: ' + err;
+      }
+    }
+  </script>
+</body>
+</html>
