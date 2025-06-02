@@ -50,7 +50,7 @@ async def run_langgraph_agent(query: str):
             return {"tool": "retrieve_historical_stock_price", "symbol": symbol.upper(), "error": str(e)}
 
     async def plan_tool_calls(state):
-        bedrock = boto3.client("bedrock-runtime")
+        bedrock = boto3.client("bedrock-runtime", region_name="us-west-2")
         prompt = f"""
 You are an AI agent that receives user questions about stocks. Respond in JSON format listing what tools to use and their arguments.
 
@@ -93,7 +93,7 @@ User Query: {state['query']}
         return {"query": state["query"], "tools": state["tools"], "results": tool_outputs}
 
     async def summarize(state):
-        bedrock = boto3.client("bedrock-runtime")
+        bedrock = boto3.client("bedrock-runtime", region_name="us-west-2")
         tool_output_summary = json.dumps(state.get("results", []))
         prompt = f"""
 The user asked the following question:
