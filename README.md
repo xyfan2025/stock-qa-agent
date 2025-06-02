@@ -32,16 +32,17 @@ Developed a serverless AI agent on AWS using FastAPI and LangGraph to handle nat
 </pre>
 Here you should see the output for service: {api_url}  
 
-### 6. Check Deployment
-Go to the AWS Lambda Console and Confirm:
+### 6. Check backend deployment
+Go to the AWS Lambda console and confirm:
 <pre>
   function name = stock-agent-api
   Handler = main.handler
   Runtime = Python 3.11  
 </pre>
+If they all exist, it means the deployment was successful.
 
 ### 7. Deploy web application
-Replace local api_url 'http://localhost:8000' with production {api_url} in public/index.html and upload the file to s3.  
+Replace {api_url} in public/index.html with production api_url from step 5 and then upload the file to s3.  
 Grant "public access" permission to s3 file or set up aws cloudfront pointing to s3, then you will have a public address.  
 
 ### 8. Test web application
